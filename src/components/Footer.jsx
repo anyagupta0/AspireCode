@@ -9,7 +9,7 @@ const footerLinks = {
   ],
   Services: [
     { label: 'Permanent Staffing', to: '/services' },
-    { label: 'Contractual Hiring', to: '/services' },
+    { label: 'Contract-to-Hire (C2H)', to: '/services' },
     { label: 'HR & Payroll', to: '/services' },
     { label: 'Web Development', to: '/services' },
   ],
@@ -36,7 +36,7 @@ export default function Footer() {
           {/* Brand */}
           <div className="footer-brand">
             <Link to="/" className="logo">
-              <img src="/logo.png" alt="AspireCode" className="logo-img" />
+              <img src="/logo.jpg" alt="AspireCode" className="logo-img" />
               <span className="logo-text">AspireCode</span>
             </Link>
             <p>

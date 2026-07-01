@@ -30,7 +30,7 @@ export default function Header() {
       <div className="container">
         <div className="header-inner">
           <Link to="/" className="logo" onClick={() => setMenuOpen(false)}>
-            <img src="/logo.png" alt="AspireCode Logo" className="logo-img" />
+            <img src="/logo.jpg" alt="AspireCode Logo" className="logo-img" />
             <span className="logo-text">AspireCode</span>
           </Link>
 

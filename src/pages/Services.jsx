@@ -10,15 +10,9 @@ const staffingServices = [
     features: ['End-to-end recruitment lifecycle', 'Background & reference checks', 'Culture fit assessment', 'Post-placement support'],
   },
   {
-    icon: '📝',
-    title: 'Contractual Hiring',
-    desc: 'Need skilled professionals for a fixed term? We provide vetted contractual talent across all domains and seniority levels.',
-    features: ['Short & long-term contracts', 'Rapid deployment', 'Skill-verified talent pool', 'Flexible engagement models'],
-  },
-  {
     icon: '🔄',
     title: 'Contract-to-Hire (C2H)',
-    desc: 'Reduce hiring risk. Evaluate talent on the job before converting them to permanent employees.',
+    desc: 'Reduce hiring risk. Evaluate talent on the job before converting them to permanent employees. Flexible contract terms that transition seamlessly into full-time roles.',
     features: ['Trial before permanent offer', 'Reduced mis-hire costs', 'Seamless conversion process', 'Ongoing performance review'],
   },
   {

@@ -58,7 +58,7 @@ export default function About() {
         <div className="container">
           <div className="about-hero-layout fade-in-section" ref={addRef}>
             <div className="about-hero-img animate-float">
-              <img src="/team.png" alt="AspireCode Team" />
+              <img src="/about-pro.png" alt="AspireCode Team" />
             </div>
             <div>
               <span className="section-tag">Who We Are</span>
@@ -205,7 +205,6 @@ export default function About() {
                       <select id="service" name="service" value={formData.service} onChange={handleChange}>
                         <option value="">Select a service...</option>
                         <option>Permanent Staffing</option>
-                        <option>Contractual Hiring</option>
                         <option>Contract-to-Hire (C2H)</option>
                         <option>HR Services</option>
                         <option>Payroll Management</option>

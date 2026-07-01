@@ -3,7 +3,6 @@ import useScrollReveal from '../hooks/useScrollReveal';
 
 const services = [
   { icon: '👥', title: 'Permanent Staffing', desc: 'We connect top talent with forward-thinking companies for lasting career opportunities.' },
-  { icon: '📝', title: 'Contractual Hiring', desc: 'Flexible workforce solutions to scale your team on-demand without long-term commitments.' },
   { icon: '🔄', title: 'Contract-to-Hire (C2H)', desc: 'Evaluate candidates on the job before making a permanent hiring commitment.' },
   { icon: '🏢', title: 'HR Services', desc: 'End-to-end human resource management, compliance, and strategic HR consulting.' },
   { icon: '💰', title: 'Payroll Management', desc: 'Accurate, timely, and compliant payroll processing so you can focus on growth.' },
@@ -12,20 +11,7 @@ const services = [
   { icon: '☁️', title: 'SaaS Projects', desc: 'Custom SaaS platform development from concept to scalable cloud deployment.' },
 ];
 
-const technologies = [
-  { icon: '⚛️', name: 'React' },
-  { icon: '🟩', name: 'Node.js' },
-  { icon: '🐍', name: 'Python' },
-  { icon: '🐘', name: 'PostgreSQL' },
-  { icon: '🍃', name: 'MongoDB' },
-  { icon: '☁️', name: 'AWS' },
-  { icon: '🐳', name: 'Docker' },
-  { icon: '🔷', name: 'TypeScript' },
-  { icon: '⚡', name: 'Next.js' },
-  { icon: '🎨', name: 'Figma' },
-  { icon: '🔍', name: 'GraphQL' },
-  { icon: '🚀', name: 'Redis' },
-];
+
 
 export default function Home() {
   const addRef = useScrollReveal();
@@ -177,28 +163,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ── TECHNOLOGIES ── */}
-      <section className="section" id="technologies">
-        <div className="container">
-          <div className="fade-in-section" ref={addRef} style={{ textAlign: 'center' }}>
-            <span className="section-tag">Tech Stack</span>
-            <h2 className="section-title">
-              Technologies We <span className="gradient-text">Master</span>
-            </h2>
-            <p className="section-subtitle" style={{ margin: '0 auto' }}>
-              We build with battle-tested, modern technologies to deliver solutions that scale.
-            </p>
-          </div>
-          <div className="tech-grid">
-            {technologies.map((t, i) => (
-              <div key={t.name} className="tech-item fade-in-section" ref={addRef} style={{ animationDelay: `${i * 0.05}s` }}>
-                <span className="tech-item-icon">{t.icon}</span>
-                <span className="tech-item-name">{t.name}</span>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
+
 
       {/* ── CTA BANNER ── */}
       <section className="section-sm" style={{ background: 'linear-gradient(135deg, rgba(108,61,255,0.2) 0%, rgba(0,212,255,0.1) 100%)', borderTop: '1px solid var(--glass-border)', borderBottom: '1px solid var(--glass-border)' }}>

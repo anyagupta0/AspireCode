@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import useScrollReveal from '../hooks/useScrollReveal';
 
 const jobs = [
@@ -154,6 +154,246 @@ const jobs = [
   },
 ];
 
+/* ─────────────────────────────────────────────────────
+   Application Modal
+───────────────────────────────────────────────────── */
+function ApplicationModal({ job, onClose }) {
+  const [form, setForm] = useState({
+    name: '',
+    dob: '',
+    role: job.title,
+    location: '',
+    workMode: '',
+    cv: null,
+    github: '',
+    portfolio: '',
+  });
+  const [submitted, setSubmitted] = useState(false);
+  const [errors, setErrors] = useState({});
+  const overlayRef = useRef(null);
+
+  // Lock body scroll while modal open
+  useEffect(() => {
+    document.body.style.overflow = 'hidden';
+    return () => { document.body.style.overflow = ''; };
+  }, []);
+
+  // Close on overlay click
+  const handleOverlayClick = (e) => {
+    if (e.target === overlayRef.current) onClose();
+  };
+
+  // Close on Escape key
+  useEffect(() => {
+    const onKey = (e) => { if (e.key === 'Escape') onClose(); };
+    window.addEventListener('keydown', onKey);
+    return () => window.removeEventListener('keydown', onKey);
+  }, [onClose]);
+
+  const handleChange = (e) => {
+    const { name, value, files } = e.target;
+    setForm(f => ({ ...f, [name]: files ? files[0] : value }));
+    if (errors[name]) setErrors(err => ({ ...err, [name]: '' }));
+  };
+
+  const validate = () => {
+    const e = {};
+    if (!form.name.trim()) e.name = 'Full name is required.';
+    if (!form.dob) e.dob = 'Date of birth is required.';
+    if (!form.role.trim()) e.role = 'Role is required.';
+    if (!form.location.trim()) e.location = 'Location is required.';
+    if (!form.workMode) e.workMode = 'Please select a work mode.';
+    return e;
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const errs = validate();
+    if (Object.keys(errs).length) { setErrors(errs); return; }
+
+    // TODO: wire to backend — e.g. POST to /api/apply with FormData
+    const payload = new FormData();
+    Object.entries(form).forEach(([k, v]) => { if (v) payload.append(k, v); });
+    console.log('Application submitted:', Object.fromEntries(payload));
+    setSubmitted(true);
+  };
+
+  return (
+    <div className="modal-overlay" ref={overlayRef} onClick={handleOverlayClick} role="dialog" aria-modal="true" aria-labelledby="apply-modal-title">
+      <div className="modal-box glass-card">
+        {submitted ? (
+          <div className="modal-success">
+            <div className="modal-success-icon">✅</div>
+            <h3 id="apply-modal-title">Application Submitted!</h3>
+            <p>Thank you, <strong>{form.name}</strong>! Your application for <strong>{form.role}</strong> has been received. Our team will get back to you within 48 hours.</p>
+            <button className="btn btn-primary" style={{ marginTop: 24 }} onClick={onClose}>Close</button>
+          </div>
+        ) : (
+          <>
+            <div className="modal-header">
+              <div>
+                <span className="section-tag" style={{ marginBottom: 8 }}>Apply Now</span>
+                <h2 id="apply-modal-title" className="modal-title">{job.title}</h2>
+                <p className="modal-subtitle">📍 {job.location} &nbsp;·&nbsp; 💰 {job.salary}</p>
+              </div>
+              <button className="modal-close" onClick={onClose} aria-label="Close modal">✕</button>
+            </div>
+
+            <form className="modal-form" onSubmit={handleSubmit} noValidate>
+              {/* Row 1 — Name + DOB */}
+              <div className="form-row">
+                <div className="form-group">
+                  <label htmlFor="app-name">Full Name <span className="required">*</span></label>
+                  <input
+                    id="app-name"
+                    name="name"
+                    type="text"
+                    placeholder="John Doe"
+                    value={form.name}
+                    onChange={handleChange}
+                    className={errors.name ? 'input-error' : ''}
+                  />
+                  {errors.name && <span className="field-error">{errors.name}</span>}
+                </div>
+                <div className="form-group">
+                  <label htmlFor="app-dob">Date of Birth <span className="required">*</span></label>
+                  <input
+                    id="app-dob"
+                    name="dob"
+                    type="date"
+                    value={form.dob}
+                    onChange={handleChange}
+                    max={new Date().toISOString().split('T')[0]}
+                    className={errors.dob ? 'input-error' : ''}
+                  />
+                  {errors.dob && <span className="field-error">{errors.dob}</span>}
+                </div>
+              </div>
+
+              {/* Row 2 — Role + Location */}
+              <div className="form-row">
+                <div className="form-group">
+                  <label htmlFor="app-role">Role <span className="required">*</span></label>
+                  <input
+                    id="app-role"
+                    name="role"
+                    type="text"
+                    placeholder="e.g. Senior React Developer"
+                    value={form.role}
+                    onChange={handleChange}
+                    className={errors.role ? 'input-error' : ''}
+                  />
+                  {errors.role && <span className="field-error">{errors.role}</span>}
+                </div>
+                <div className="form-group">
+                  <label htmlFor="app-location">Your Location <span className="required">*</span></label>
+                  <input
+                    id="app-location"
+                    name="location"
+                    type="text"
+                    placeholder="e.g. Bangalore, India"
+                    value={form.location}
+                    onChange={handleChange}
+                    className={errors.location ? 'input-error' : ''}
+                  />
+                  {errors.location && <span className="field-error">{errors.location}</span>}
+                </div>
+              </div>
+
+              {/* Work Mode */}
+              <div className="form-group">
+                <label>Work Mode Preference <span className="required">*</span></label>
+                <div className="workmode-options">
+                  {['Remote', 'On-site', 'Hybrid'].map(mode => (
+                    <label key={mode} className={`workmode-option${form.workMode === mode ? ' selected' : ''}`}>
+                      <input
+                        type="radio"
+                        name="workMode"
+                        value={mode}
+                        checked={form.workMode === mode}
+                        onChange={handleChange}
+                      />
+                      <span className="workmode-icon">
+                        {mode === 'Remote' ? '🏠' : mode === 'On-site' ? '🏢' : '🔀'}
+                      </span>
+                      {mode}
+                    </label>
+                  ))}
+                </div>
+                {errors.workMode && <span className="field-error">{errors.workMode}</span>}
+              </div>
+
+              <div className="modal-divider">
+                <span>Optional Attachments</span>
+              </div>
+
+              {/* CV Upload */}
+              <div className="form-group">
+                <label htmlFor="app-cv">
+                  CV / Resume
+                  <span className="optional-badge">Optional</span>
+                </label>
+                <div className="file-upload-wrap">
+                  <label htmlFor="app-cv" className="file-upload-btn">
+                    📎 {form.cv ? form.cv.name : 'Choose File (PDF, DOC, DOCX)'}
+                  </label>
+                  <input
+                    id="app-cv"
+                    name="cv"
+                    type="file"
+                    accept=".pdf,.doc,.docx"
+                    onChange={handleChange}
+                    style={{ display: 'none' }}
+                  />
+                </div>
+              </div>
+
+              {/* GitHub + Portfolio */}
+              <div className="form-row">
+                <div className="form-group">
+                  <label htmlFor="app-github">
+                    GitHub URL
+                    <span className="optional-badge">Optional</span>
+                  </label>
+                  <input
+                    id="app-github"
+                    name="github"
+                    type="url"
+                    placeholder="https://github.com/username"
+                    value={form.github}
+                    onChange={handleChange}
+                  />
+                </div>
+                <div className="form-group">
+                  <label htmlFor="app-portfolio">
+                    Portfolio URL
+                    <span className="optional-badge">Optional</span>
+                  </label>
+                  <input
+                    id="app-portfolio"
+                    name="portfolio"
+                    type="url"
+                    placeholder="https://yourportfolio.com"
+                    value={form.portfolio}
+                    onChange={handleChange}
+                  />
+                </div>
+              </div>
+
+              <button type="submit" className="btn btn-primary form-submit-btn" id="apply-submit-btn">
+                Submit Application 🚀
+              </button>
+            </form>
+          </>
+        )}
+      </div>
+    </div>
+  );
+}
+
+/* ─────────────────────────────────────────────────────
+   Job Card
+───────────────────────────────────────────────────── */
 function JobCard({ job, onClick }) {
   return (
     <div className="glass-card job-card" onClick={() => onClick(job)} tabIndex={0} role="button" onKeyDown={e => e.key === 'Enter' && onClick(job)}>
@@ -177,7 +417,12 @@ function JobCard({ job, onClick }) {
   );
 }
 
+/* ─────────────────────────────────────────────────────
+   Job Detail
+───────────────────────────────────────────────────── */
 function JobDetail({ job, onBack }) {
+  const [showApplyModal, setShowApplyModal] = useState(false);
+
   return (
     <div className="section">
       <div className="container">
@@ -235,7 +480,13 @@ function JobDetail({ job, onBack }) {
               <div style={{ fontSize: '2.5rem', marginBottom: 12 }}>🚀</div>
               <h3>Apply for This Role</h3>
               <p>Submit your application and one of our recruiters will reach out within 48 hours.</p>
-              <a href="mailto:careers@aspirecode.in" className="btn btn-primary">Apply Now</a>
+              <button
+                id="apply-now-btn"
+                className="btn btn-primary"
+                onClick={() => setShowApplyModal(true)}
+              >
+                Apply Now
+              </button>
               <button className="btn btn-outline" style={{ marginTop: 0 }}>Save Job</button>
               <div style={{ marginTop: 24, paddingTop: 20, borderTop: '1px solid var(--glass-border)' }}>
                 <p style={{ fontSize: '0.8rem', color: 'var(--white-muted)', textAlign: 'left', margin: 0 }}>💰 <strong style={{ color: 'var(--white)' }}>{job.salary}</strong></p>
@@ -245,10 +496,17 @@ function JobDetail({ job, onBack }) {
           </div>
         </div>
       </div>
+
+      {showApplyModal && (
+        <ApplicationModal job={job} onClose={() => setShowApplyModal(false)} />
+      )}
     </div>
   );
 }
 
+/* ─────────────────────────────────────────────────────
+   Careers Page
+───────────────────────────────────────────────────── */
 export default function Careers() {
   const [selectedJob, setSelectedJob] = useState(null);
   const [activeFilter, setActiveFilter] = useState('All');
