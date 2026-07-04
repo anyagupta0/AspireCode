@@ -14,8 +14,8 @@ createRoot(document.getElementById('root')).render(
 window.requestAnimationFrame(() => {
   try {
     initButtonRipples();
-    initButtonMagnetic();
-    initCursorInteractions();
+    // initButtonMagnetic(); // Disabled for performance
+    // initCursorInteractions(); // Disabled for performance
   } catch {
     // silent fail in SSR or test env
   }

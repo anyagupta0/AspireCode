@@ -181,7 +181,7 @@ export default function Home() {
               ref={addRef}
               data-delay="0"
             >
-              <img src="/team.png" alt="AspireCode team collaborating" />
+              <img src="/team.png" alt="AspireCode team collaborating" loading="lazy" />
             </div>
 
             <div className="fade-in-section fade-right" ref={addRef} data-delay="100">
@@ -229,7 +229,7 @@ export default function Home() {
             </p>
           </div>
 
-          <div className="services-grid stagger-children" data-delay="60" style={{ position: 'relative', zIndex: 1 }}>
+          <div className="services-grid home-services-grid stagger-children" data-delay="60" style={{ position: 'relative', zIndex: 1 }}>
             {services.map((s, i) => (
               <div
                 key={s.title}
@@ -283,7 +283,7 @@ export default function Home() {
                 data-delay={`${i * 100}`}
               >
                 <div className="portfolio-img-wrap">
-                  <img src={p.img} alt={p.title} />
+                  <img src={p.img} alt={p.title} loading="lazy" />
                   <div className="portfolio-overlay">
                     <Link
                       to="/portfolio"
