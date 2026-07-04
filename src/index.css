@@ -133,7 +133,6 @@ body {
     radial-gradient(circle at 12% 10%, rgba(71,176,199,0.18) 0%, transparent 24%),
     radial-gradient(circle at 88% 14%, rgba(36,68,112,0.12) 0%, transparent 20%),
     linear-gradient(180deg, #E7F6FD 0%, #D8EDF6 46%, #CDE6EE 100%);
-  background-attachment: fixed;
   color: var(--text);
   font-family: var(--font-body);
   font-size: 16px;
@@ -451,13 +450,15 @@ h1, h2, h3, h4, h5, h6 {
   align-items: center;
   gap: var(--space-3);
   flex-shrink: 0;
+  background: transparent;
 }
 
 .logo-img {
-  height: 38px;
   width: 38px;
-  border-radius: 8px;
-  object-fit: cover;
+  height: 38px;
+  object-fit: contain;
+  background: transparent;
+  border-radius: 0;
 }
 
 .logo-text {
@@ -3040,7 +3041,6 @@ body::after {
     gap: var(--space-8);
   }
   .hero-illustration {
-    order: -1;
     max-height: 320px;
     overflow: hidden;
   }
