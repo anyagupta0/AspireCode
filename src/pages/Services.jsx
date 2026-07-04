@@ -12,7 +12,7 @@ const staffingServices = [
   {
     icon: '🔄',
     title: 'Contract-to-Hire (C2H)',
-    desc: 'Reduce hiring risk. Evaluate talent on the job before converting them to permanent employees. Flexible contract terms that transition seamlessly into full-time roles.',
+    desc: 'Reduce hiring risk. Evaluate talent on the job before converting them to permanent employees. Flexible contract terms that transition seamlessly.',
     features: ['Trial before permanent offer', 'Reduced mis-hire costs', 'Seamless conversion process', 'Ongoing performance review'],
   },
   {
@@ -56,6 +56,15 @@ const techServices = [
   },
 ];
 
+const advantages = [
+  { icon: '⚡', title: 'Fast Turnaround', desc: 'We deliver results quickly — whether it\'s a hire in 72 hours or a web feature in a sprint.' },
+  { icon: '🎯', title: 'Precision Matching', desc: 'Our AI-assisted screening ensures the best talent fit for your culture and technical requirements.' },
+  { icon: '🔒', title: 'Compliance First', desc: 'All our staffing and payroll operations are fully compliant with local regulations and labor laws.' },
+  { icon: '🌏', title: 'Global Reach', desc: 'Access a global talent network spanning 20+ countries and industries.' },
+  { icon: '📞', title: 'Dedicated Support', desc: 'A dedicated account manager for every client, ensuring personalized and responsive service.' },
+  { icon: '📊', title: 'Data-Driven', desc: 'Every strategy is backed by data — from recruitment analytics to SEO performance dashboards.' },
+];
+
 export default function Services() {
   const addRef = useScrollReveal();
 
@@ -67,7 +76,7 @@ export default function Services() {
   return (
     <>
       {/* Page Hero */}
-      <section className="page-hero">
+      <section className="page-hero" aria-label="Services hero">
         <div className="page-hero-bg" />
         <div className="page-hero-orb" />
         <div className="container">
@@ -84,17 +93,23 @@ export default function Services() {
       </section>
 
       {/* Staffing Services */}
-      <section className="section">
+      <section className="section section-with-pattern" aria-label="Staffing and HR Services">
         <div className="container">
-          <div className="services-section-title fade-in-section" ref={addRef}>
-            <h2>🤝 Staffing & HR Services</h2>
+          <div className="services-section-title fade-in-section" ref={addRef} data-anim="u-anim-up">
+            <h2>🤝 Staffing &amp; HR Services</h2>
             <div className="services-section-line" />
           </div>
-          <div className="service-detailed-grid">
+
+          <div className="service-detailed-grid stagger-children" data-delay="60">
             {staffingServices.map((s, i) => (
-              <div key={s.title} className="glass-card service-detailed-card fade-in-section" ref={addRef}>
-                <span className="sdcard-num">0{i + 1}</span>
-                <div className="service-icon">{s.icon}</div>
+              <div
+                key={s.title}
+                className="glass-card service-detailed-card fade-in-section"
+                ref={addRef}
+                data-delay={`${i * 80}`}
+              >
+                <span className="sdcard-num" aria-hidden="true">0{i + 1}</span>
+                <div className="service-icon" aria-hidden="true">{s.icon}</div>
                 <h3>{s.title}</h3>
                 <p>{s.desc}</p>
                 <ul>
@@ -105,15 +120,21 @@ export default function Services() {
           </div>
 
           {/* Technology Services */}
-          <div className="services-section-title fade-in-section" ref={addRef}>
+          <div className="services-section-title fade-in-section" ref={addRef} data-anim="u-anim-up">
             <h2>💻 Technology Services</h2>
             <div className="services-section-line" />
           </div>
-          <div className="service-detailed-grid">
+
+          <div className="service-detailed-grid stagger-children" data-delay="60">
             {techServices.map((s, i) => (
-              <div key={s.title} className="glass-card service-detailed-card fade-in-section" ref={addRef}>
-                <span className="sdcard-num">0{i + 1}</span>
-                <div className="service-icon">{s.icon}</div>
+              <div
+                key={s.title}
+                className="glass-card service-detailed-card fade-in-section"
+                ref={addRef}
+                data-delay={`${i * 80}`}
+              >
+                <span className="sdcard-num" aria-hidden="true">0{i + 1}</span>
+                <div className="service-icon" aria-hidden="true">{s.icon}</div>
                 <h3>{s.title}</h3>
                 <p>{s.desc}</p>
                 <ul>
@@ -126,25 +147,31 @@ export default function Services() {
       </section>
 
       {/* Why Choose Us */}
-      <section className="section" style={{ background: 'var(--navy-mid)', borderTop: '1px solid var(--glass-border)' }}>
+      <section
+        className="section bg-hex"
+        aria-label="Why AspireCode"
+        style={{ background: 'var(--bg-alt)', borderTop: '1px solid var(--border)' }}
+      >
         <div className="container">
           <div className="fade-in-section" ref={addRef} style={{ textAlign: 'center', marginBottom: 56 }}>
             <span className="section-tag">Why AspireCode</span>
             <h2 className="section-title">
               The <span className="gradient-text">AspireCode</span> Advantage
             </h2>
+            <p className="section-subtitle" style={{ margin: '0 auto' }}>
+              What sets us apart from every other staffing and technology partner.
+            </p>
           </div>
-          <div className="services-grid">
-            {[
-              { icon: '⚡', title: 'Fast Turnaround', desc: 'We deliver results quickly — whether it\'s a hire in 72 hours or a web feature in a sprint.' },
-              { icon: '🎯', title: 'Precision Matching', desc: 'Our AI-assisted screening ensures the best talent fit for your culture and technical requirements.' },
-              { icon: '🔒', title: 'Compliance First', desc: 'All our staffing and payroll operations are fully compliant with local regulations and labor laws.' },
-              { icon: '🌏', title: 'Global Reach', desc: 'Access a global talent network spanning 20+ countries and industries.' },
-              { icon: '📞', title: 'Dedicated Support', desc: 'A dedicated account manager for every client, ensuring personalized and responsive service.' },
-              { icon: '📊', title: 'Data-Driven', desc: 'Every strategy is backed by data — from recruitment analytics to SEO performance dashboards.' },
-            ].map(item => (
-              <div key={item.title} className="glass-card service-card fade-in-section" ref={addRef}>
-                <div className="service-icon">{item.icon}</div>
+
+          <div className="services-grid stagger-children" data-delay="60">
+            {advantages.map((item, i) => (
+              <div
+                key={item.title}
+                className="glass-card service-card fade-in-section"
+                ref={addRef}
+                data-delay={`${i * 70}`}
+              >
+                <div className="service-icon" aria-hidden="true">{item.icon}</div>
                 <h3>{item.title}</h3>
                 <p>{item.desc}</p>
               </div>
@@ -154,17 +181,31 @@ export default function Services() {
       </section>
 
       {/* CTA */}
-      <section className="section-sm" style={{ textAlign: 'center', background: 'linear-gradient(135deg, rgba(108,61,255,0.15) 0%, rgba(0,212,255,0.08) 100%)', borderTop: '1px solid var(--glass-border)' }}>
+      <section
+        className="section-sm cta-section"
+        aria-label="Call to action"
+        style={{ textAlign: 'center' }}
+      >
         <div className="container">
           <h2 className="section-title fade-in-section" ref={addRef}>
             Ready to Get <span className="gradient-text">Started?</span>
           </h2>
-          <p className="section-subtitle fade-in-section" ref={addRef} style={{ margin: '0 auto 36px' }}>
+          <p
+            className="section-subtitle fade-in-section"
+            ref={addRef}
+            data-delay="80"
+            style={{ margin: '0 auto 40px' }}
+          >
             Talk to our team and discover how AspireCode can power your next phase of growth.
           </p>
-          <div className="fade-in-section" ref={addRef} style={{ display: 'flex', gap: 16, justifyContent: 'center', flexWrap: 'wrap' }}>
+          <div
+            className="fade-in-section"
+            ref={addRef}
+            data-delay="160"
+            style={{ display: 'flex', gap: 16, justifyContent: 'center', flexWrap: 'wrap' }}
+          >
             <Link to="/about" className="btn btn-primary">Contact Us Today</Link>
-            <Link to="/portfolio" className="btn btn-outline">See Our Work</Link>
+            <Link to="/portfolio" className="btn btn-outline">See Our Work →</Link>
           </div>
         </div>
       </section>
