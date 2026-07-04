@@ -22,9 +22,9 @@ const footerLinks = {
 };
 
 const socials = [
-  { icon: '🔗', label: 'LinkedIn',   href: 'https://linkedin.com' },
+  { icon: '🔗', label: 'LinkedIn',   href: 'https://www.linkedin.com/company/aspirecode/' },
   { icon: '𝕏',   label: 'X/Twitter', href: 'https://twitter.com' },
-  { icon: '📸',  label: 'Instagram', href: 'https://instagram.com' },
+  { icon: '📸',  label: 'Instagram', href: 'https://www.instagram.com/aspire.code?igsh=eWhzYzltbmo2bGFv' },
   { icon: '💻',  label: 'GitHub',    href: 'https://github.com' },
 ];
 

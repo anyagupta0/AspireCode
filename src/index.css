@@ -3083,7 +3083,13 @@ body::after {
 
   .hero-title  { font-size: 2.2rem; }
   .hero-tagline { font-size: 1.5rem; }
-  .hero-stats  { gap: var(--space-6); }
+
+  .hero-stats  { gap: var(--space-4); }
+  .stat-item   { min-width: 0 !important; }
+  .float-stat .stat-item { padding: var(--space-3) var(--space-3); word-break: break-word; }
+  .stat-label  { font-size: 0.85rem; }
+  .stat-number { font-size: 1.7rem; }
+
   .hero-dots   { display: none; }
 
   .hero-content {
@@ -3119,8 +3125,9 @@ body::after {
   }
 
   .hero-stats {
-    flex-wrap: wrap;
-    gap: var(--space-6);
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--space-4);
   }
 
   .about-strip-img img { height: auto; max-width: 100%; }
