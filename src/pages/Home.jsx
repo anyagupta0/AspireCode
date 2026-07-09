@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom';
 import { useEffect, useRef } from 'react';
 import useScrollReveal from '../hooks/useScrollReveal';
+import '../new-cards.css';
 
 const services = [
   { icon: '👥', title: 'Permanent Staffing', desc: 'We connect top talent with forward-thinking companies for lasting career opportunities.' },
@@ -135,36 +136,7 @@ export default function Home() {
               </div>
             </div>
 
-            {/* Right — Illustration */}
-            <div className="hero-illustration fade-in-section u-float-slow" aria-hidden="true" ref={addRef} data-delay="200" data-anim="u-float-slow">
-              <div className="illustration-stage">
-                <img src="/hero.png" alt="AspireCode modern abstract technology illustration" />
 
-                <div className="code-window" aria-hidden="true">
-                  <div className="cw-top">
-                    <span className="dot" />
-                    <span className="dot" />
-                    <span className="dot" />
-                  </div>
-                  <div className="cw-body">
-                    <div className="code-line l1" />
-                    <div className="code-line l2" />
-                    <div className="code-line l3" />
-                    <div className="code-line l4" />
-                    <div className="code-line l5" />
-                  </div>
-                </div>
-
-                <div className="floating-card glass-card" aria-hidden="true">
-                  <div className="fc-head">Featured</div>
-                  <h4>Realtime Analytics</h4>
-                  <p>Live dashboards, alerts, and insights for your product metrics.</p>
-                  <div className="fc-cta">
-                    <Link to="/portfolio" className="btn btn-outline">View Demo</Link>
-                  </div>
-                </div>
-              </div>
-            </div>
           </div>
         </div>
       </section>
@@ -229,17 +201,23 @@ export default function Home() {
             </p>
           </div>
 
-          <div className="services-grid home-services-grid stagger-children" data-delay="60" style={{ position: 'relative', zIndex: 1 }}>
+          <div className="services-grid home-services-grid stagger-children" data-delay="60" style={{ position: 'relative', zIndex: 1, display: 'flex', flexWrap: 'wrap', justifyContent: 'center', gap: '24px' }}>
             {services.map((s, i) => (
               <div
                 key={s.title}
-                className="glass-card service-card fade-in-section"
+                className="fade-in-section"
                 ref={addRef}
                 data-delay={`${i * 80}`}
               >
-                <div className="service-icon" aria-hidden="true">{s.icon}</div>
-                <h3>{s.title}</h3>
-                <p>{s.desc}</p>
+                <div className="sazzad-card" style={{ textAlign: 'center' }}>
+                  <div className="sazzad-bg"></div>
+                  <div className="sazzad-aurora"></div>
+                  <div style={{ position: 'relative', zIndex: 3, padding: '16px', width: '100%' }}>
+                    <div className="service-icon" aria-hidden="true" style={{ fontSize: '2.8rem', marginBottom: '8px' }}>{s.icon}</div>
+                    <h3 style={{ fontSize: '1.2rem', marginBottom: '8px', color: '#333' }}>{s.title}</h3>
+                    <p className="small" style={{ color: '#666', fontSize: '14px' }}>{s.desc}</p>
+                  </div>
+                </div>
               </div>
             ))}
           </div>
@@ -278,30 +256,35 @@ export default function Home() {
             {portfolioItems.map((p, i) => (
               <div
                 key={i}
-                className="glass-card portfolio-card fade-in-section"
+                className="sazzad-card portfolio-card fade-in-section"
                 ref={addRef}
                 data-delay={`${i * 100}`}
+                style={{ width: '100%', height: '100%', padding: 0, flexDirection: 'column', alignItems: 'stretch', justifyContent: 'flex-start' }}
               >
-                <div className="portfolio-img-wrap">
-                  <img src={p.img} alt={p.title} loading="lazy" />
-                  <div className="portfolio-overlay">
-                    <Link
-                      to="/portfolio"
-                      className="btn btn-primary"
-                      style={{ padding: '10px 24px', fontSize: '0.85rem' }}
-                    >
-                      View Project
-                    </Link>
+                <div className="sazzad-bg" style={{ inset: '6px' }}></div>
+                <div className="sazzad-aurora"></div>
+                <div style={{ position: 'relative', zIndex: 3, display: 'flex', flexDirection: 'column', height: '100%', width: '100%' }}>
+                  <div className="portfolio-img-wrap" style={{ borderRadius: '12px 12px 0 0', overflow: 'hidden', margin: '6px 6px 0 6px' }}>
+                    <img src={p.img} alt={p.title} loading="lazy" style={{ width: '100%', display: 'block' }} />
+                    <div className="portfolio-overlay">
+                      <Link
+                        to="/portfolio"
+                        className="btn btn-primary"
+                        style={{ padding: '10px 24px', fontSize: '0.85rem' }}
+                      >
+                        View Project
+                      </Link>
+                    </div>
                   </div>
-                </div>
-                <div className="portfolio-body">
-                  <span className="tech-tag" style={{ marginBottom: 10, display: 'inline-block' }}>
-                    {p.category}
-                  </span>
-                  <h3>{p.title}</h3>
-                  <p>{p.desc}</p>
-                  <div className="tech-tags">
-                    {p.tags.map(t => <span key={t} className="tech-tag">{t}</span>)}
+                  <div className="portfolio-body" style={{ flexGrow: 1, padding: '24px' }}>
+                    <span className="tech-tag" style={{ marginBottom: 10, display: 'inline-block', background: 'rgba(0,0,0,0.06)', color: '#333' }}>
+                      {p.category}
+                    </span>
+                    <h3 style={{ color: '#222' }}>{p.title}</h3>
+                    <p style={{ color: '#555' }}>{p.desc}</p>
+                    <div className="tech-tags">
+                      {p.tags.map(t => <span key={t} className="tech-tag" style={{ background: 'rgba(0,0,0,0.06)', color: '#333' }}>{t}</span>)}
+                    </div>
                   </div>
                 </div>
               </div>

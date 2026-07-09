@@ -1,5 +1,6 @@
 import { useState, useEffect, useRef } from 'react';
 import useScrollReveal from '../hooks/useScrollReveal';
+import '../new-cards.css';
 
 const jobs = [
   {
@@ -396,23 +397,29 @@ function ApplicationModal({ job, onClose }) {
 ───────────────────────────────────────────────────── */
 function JobCard({ job, onClick }) {
   return (
-    <div className="glass-card job-card" onClick={() => onClick(job)} tabIndex={0} role="button" onKeyDown={e => e.key === 'Enter' && onClick(job)}>
-      <div className="job-card-header">
-        <div className="service-icon" style={{ width: 44, height: 44, fontSize: '1.2rem', marginBottom: 0 }}>
-          {job.department === 'Technology' ? '💻' : job.department === 'HR & Staffing' ? '👥' : job.department === 'Digital Marketing' ? '📈' : '📊'}
+    <div className="card job-card" onClick={() => onClick(job)} tabIndex={0} role="button" onKeyDown={e => e.key === 'Enter' && onClick(job)} style={{ cursor: 'pointer' }}>
+      <div className="sazzad-card" style={{ width: '320px', height: 'auto', minHeight: '380px', display: 'flex', flexDirection: 'column' }}>
+        <div className="sazzad-bg"></div>
+        <div className="sazzad-aurora"></div>
+        <div style={{ position: 'relative', zIndex: 3, padding: '24px', width: '100%', display: 'flex', flexDirection: 'column', flex: 1, textAlign: 'left' }}>
+          <div className="job-card-header" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+            <div className="service-icon" style={{ width: 44, height: 44, fontSize: '1.2rem', marginBottom: 0, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+              {job.department === 'Technology' ? '💻' : job.department === 'HR & Staffing' ? '👥' : job.department === 'Digital Marketing' ? '📈' : '📊'}
+            </div>
+            <span className={`job-badge ${job.type}`}>{job.typeBadge}</span>
+          </div>
+          <h3 style={{ marginTop: 14, color: '#333', fontSize: '1.2rem' }}>{job.title}</h3>
+          <div className="job-meta" style={{ display: 'flex', gap: '10px', flexWrap: 'wrap', marginTop: '8px', marginBottom: '12px' }}>
+            <span className="job-meta-item" style={{ color: '#666', fontSize: '0.85rem' }}>📍 {job.location}</span>
+            <span className="job-meta-item" style={{ color: '#666', fontSize: '0.85rem' }}>⏱ {job.experience}</span>
+            <span className="job-meta-item" style={{ color: '#666', fontSize: '0.85rem' }}>💼 {job.department}</span>
+          </div>
+          <p className="small" style={{ color: '#666', flex: 1, marginBottom: '16px' }}>{job.desc}</p>
+          <button className="btn btn-primary" style={{ width: '100%', justifyContent: 'center', padding: '11px', marginTop: 'auto' }}>
+            View Details →
+          </button>
         </div>
-        <span className={`job-badge ${job.type}`}>{job.typeBadge}</span>
       </div>
-      <h3 style={{ marginTop: 14 }}>{job.title}</h3>
-      <div className="job-meta">
-        <span className="job-meta-item">📍 {job.location}</span>
-        <span className="job-meta-item">⏱ {job.experience}</span>
-        <span className="job-meta-item">💼 {job.department}</span>
-      </div>
-      <p>{job.desc}</p>
-      <button className="btn btn-primary" style={{ width: '100%', justifyContent: 'center', padding: '11px' }}>
-        View Details →
-      </button>
     </div>
   );
 }
@@ -547,17 +554,23 @@ export default function Careers() {
       <section className="section">
         <div className="container">
           {/* Why Join */}
-          <div className="fade-in-section" ref={addRef} style={{ marginBottom: 64, display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(220px, 1fr))', gap: 20 }}>
+          <div className="fade-in-section stagger-children" ref={addRef} style={{ marginBottom: 64, display: 'flex', flexWrap: 'wrap', justifyContent: 'center', gap: '24px' }}>
             {[
               { icon: '🌱', title: 'Grow Fast', desc: 'Accelerated learning paths and mentorship programs.' },
               { icon: '🤝', title: 'Great Culture', desc: 'Collaborative, inclusive, and high-performance environment.' },
               { icon: '💻', title: 'Remote Friendly', desc: 'Hybrid and fully remote options for most roles.' },
               { icon: '🎁', title: 'Great Benefits', desc: 'Health insurance, learning budget, generous leave policy.' },
-            ].map(item => (
-              <div key={item.title} className="glass-card" style={{ padding: 24 }}>
-                <div style={{ fontSize: '2rem', marginBottom: 10 }}>{item.icon}</div>
-                <h4 style={{ fontFamily: 'var(--font-heading)', marginBottom: 6, fontSize: '1rem' }}>{item.title}</h4>
-                <p style={{ color: 'var(--white-muted)', fontSize: '0.85rem' }}>{item.desc}</p>
+            ].map((item, i) => (
+              <div key={item.title} className="card fade-in-section" data-delay={`${i * 80}`}>
+                <div className="sazzad-card" style={{ textAlign: 'center' }}>
+                  <div className="sazzad-bg"></div>
+                  <div className="sazzad-aurora"></div>
+                  <div style={{ position: 'relative', zIndex: 3, padding: '24px', width: '100%' }}>
+                    <div style={{ fontSize: '2rem', marginBottom: 10 }}>{item.icon}</div>
+                    <h4 style={{ fontFamily: 'var(--font-heading)', marginBottom: 6, fontSize: '1rem', color: '#333' }}>{item.title}</h4>
+                    <p className="small" style={{ color: '#666' }}>{item.desc}</p>
+                  </div>
+                </div>
               </div>
             ))}
           </div>
@@ -577,9 +590,9 @@ export default function Careers() {
             ))}
           </div>
 
-          <div className="jobs-grid">
-            {filteredJobs.map(job => (
-              <div key={job.id} className="fade-in-section" ref={addRef}>
+          <div className="jobs-grid stagger-children" style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'center', gap: '24px' }}>
+            {filteredJobs.map((job, i) => (
+              <div key={job.id} className="fade-in-section" ref={addRef} data-delay={`${i * 80}`}>
                 <JobCard job={job} onClick={setSelectedJob} />
               </div>
             ))}

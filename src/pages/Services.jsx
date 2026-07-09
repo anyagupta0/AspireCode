@@ -1,6 +1,7 @@
 import { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import useScrollReveal from '../hooks/useScrollReveal';
+import '../new-cards.css';
 
 const staffingServices = [
   {
@@ -104,17 +105,24 @@ export default function Services() {
             {staffingServices.map((s, i) => (
               <div
                 key={s.title}
-                className="glass-card service-detailed-card fade-in-section"
+                className="sazzad-card fade-in-section"
                 ref={addRef}
                 data-delay={`${i * 80}`}
+                style={{ width: '100%', height: '100%', padding: '0', flexDirection: 'column', alignItems: 'stretch', justifyContent: 'flex-start' }}
               >
-                <span className="sdcard-num" aria-hidden="true">0{i + 1}</span>
-                <div className="service-icon" aria-hidden="true">{s.icon}</div>
-                <h3>{s.title}</h3>
-                <p>{s.desc}</p>
-                <ul>
-                  {s.features.map(f => <li key={f}>{f}</li>)}
-                </ul>
+                <div className="sazzad-bg"></div>
+                <div className="sazzad-aurora"></div>
+                <div style={{ position: 'relative', zIndex: 3, padding: '16px', width: '100%', height: '100%', textAlign: 'center' }}>
+                  <span className="sdcard-num" aria-hidden="true" style={{ color: 'rgba(0,0,0,0.1)' }}>0{i + 1}</span>
+                  <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '12px', marginBottom: '12px' }}>
+                    <div className="service-icon" aria-hidden="true" style={{ marginBottom: '0', fontSize: '2rem' }}>{s.icon}</div>
+                    <h3 style={{ color: '#222', fontSize: '1.2rem', margin: '0' }}>{s.title}</h3>
+                  </div>
+                  <p style={{ color: '#555', fontSize: '0.9rem', marginBottom: '12px' }}>{s.desc}</p>
+                  <ul style={{ color: '#555', fontSize: '0.85rem', padding: 0, listStylePosition: 'inside' }}>
+                    {s.features.map(f => <li key={f} style={{ marginBottom: '4px' }}>{f}</li>)}
+                  </ul>
+                </div>
               </div>
             ))}
           </div>
@@ -129,17 +137,24 @@ export default function Services() {
             {techServices.map((s, i) => (
               <div
                 key={s.title}
-                className="glass-card service-detailed-card fade-in-section"
+                className="sazzad-card fade-in-section"
                 ref={addRef}
                 data-delay={`${i * 80}`}
+                style={{ width: '100%', height: '100%', padding: '0', flexDirection: 'column', alignItems: 'stretch', justifyContent: 'flex-start' }}
               >
-                <span className="sdcard-num" aria-hidden="true">0{i + 1}</span>
-                <div className="service-icon" aria-hidden="true">{s.icon}</div>
-                <h3>{s.title}</h3>
-                <p>{s.desc}</p>
-                <ul>
-                  {s.features.map(f => <li key={f}>{f}</li>)}
-                </ul>
+                <div className="sazzad-bg"></div>
+                <div className="sazzad-aurora"></div>
+                <div style={{ position: 'relative', zIndex: 3, padding: '16px', width: '100%', height: '100%', textAlign: 'center' }}>
+                  <span className="sdcard-num" aria-hidden="true" style={{ color: 'rgba(0,0,0,0.1)' }}>0{i + 1}</span>
+                  <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '12px', marginBottom: '12px' }}>
+                    <div className="service-icon" aria-hidden="true" style={{ marginBottom: '0', fontSize: '2rem' }}>{s.icon}</div>
+                    <h3 style={{ color: '#222', fontSize: '1.2rem', margin: '0' }}>{s.title}</h3>
+                  </div>
+                  <p style={{ color: '#555', fontSize: '0.9rem', marginBottom: '12px' }}>{s.desc}</p>
+                  <ul style={{ color: '#555', fontSize: '0.85rem', padding: 0, listStylePosition: 'inside' }}>
+                    {s.features.map(f => <li key={f} style={{ marginBottom: '4px' }}>{f}</li>)}
+                  </ul>
+                </div>
               </div>
             ))}
           </div>
@@ -167,13 +182,20 @@ export default function Services() {
             {advantages.map((item, i) => (
               <div
                 key={item.title}
-                className="glass-card service-card fade-in-section"
+                className="sazzad-card fade-in-section"
                 ref={addRef}
                 data-delay={`${i * 70}`}
+                style={{ width: '100%', height: '100%', padding: '0', flexDirection: 'column', alignItems: 'stretch', justifyContent: 'flex-start', textAlign: 'center' }}
               >
-                <div className="service-icon" aria-hidden="true">{item.icon}</div>
-                <h3>{item.title}</h3>
-                <p>{item.desc}</p>
+                <div className="sazzad-bg"></div>
+                <div className="sazzad-aurora"></div>
+                <div style={{ position: 'relative', zIndex: 3, padding: '16px', width: '100%', height: '100%' }}>
+                  <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '12px', marginBottom: '12px' }}>
+                    <div className="service-icon" aria-hidden="true" style={{ marginBottom: '0', fontSize: '2rem' }}>{item.icon}</div>
+                    <h3 style={{ color: '#222', fontSize: '1.2rem', margin: '0' }}>{item.title}</h3>
+                  </div>
+                  <p style={{ color: '#555', fontSize: '0.9rem' }}>{item.desc}</p>
+                </div>
               </div>
             ))}
           </div>

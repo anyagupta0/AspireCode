@@ -1,10 +1,11 @@
 import { useState, useEffect } from 'react';
 import useScrollReveal from '../hooks/useScrollReveal';
+import '../new-cards.css';
 
 const socials = [
-  { icon: '🔗', name: 'LinkedIn',    handle: '@AspireCode', desc: 'Connect with us professionally',    href: 'https://linkedin.com' },
+  { icon: <svg width="1.2em" height="1.2em" viewBox="0 0 24 24" fill="currentColor"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>, name: 'LinkedIn',    handle: '@AspireCode', desc: 'Connect with us professionally',    href: 'https://linkedin.com' },
   { icon: '𝕏',   name: 'X / Twitter', handle: '@AspireCode', desc: 'Follow us for industry insights',  href: 'https://twitter.com' },
-  { icon: '📸',  name: 'Instagram',  handle: '@AspireCode', desc: 'Behind the scenes & culture',      href: 'https://instagram.com' },
+  { icon: <svg width="1.2em" height="1.2em" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>,  name: 'Instagram',  handle: '@AspireCode', desc: 'Behind the scenes & culture',      href: 'https://instagram.com' },
   { icon: '💻',  name: 'GitHub',     handle: 'AspireCode',  desc: 'Explore our open-source work',     href: 'https://github.com' },
 ];
 
@@ -102,7 +103,7 @@ export default function About() {
               <span className="section-tag">Our Foundation</span>
               <h2 className="section-title">What Drives <span className="gradient-text">Us</span></h2>
             </div>
-            <div className="about-values-grid stagger-children">
+            <div className="about-values-grid stagger-children" style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'center', gap: '24px' }}>
               {[
                 { icon: '🎯', title: 'Our Mission', desc: 'To empower businesses through exceptional talent placement and innovative technology solutions, creating lasting impact.' },
                 { icon: '🌟', title: 'Our Vision', desc: 'To be South Asia\'s most trusted staffing and technology partner, known for integrity, speed, and results.' },
@@ -111,13 +112,21 @@ export default function About() {
               ].map((item, i) => (
                 <div
                   key={item.title}
-                  className="glass-card value-card fade-in-section"
+                  className="card fade-in-section"
                   ref={addRef}
                   data-delay={`${i * 80}`}
                 >
-                  <span className="value-card-icon" aria-hidden="true">{item.icon}</span>
-                  <h3>{item.title}</h3>
-                  <p>{item.desc}</p>
+                  <div className="sazzad-card">
+                    <div className="sazzad-bg"></div>
+                    <div className="sazzad-aurora"></div>
+                    <div style={{ position: 'relative', zIndex: 3, padding: '24px', width: '100%' }}>
+                      <h3 style={{ fontSize: '1.2rem', marginBottom: '8px', color: '#333' }}>
+                        <span aria-hidden="true" style={{ marginRight: '8px' }}>{item.icon}</span>
+                        {item.title}
+                      </h3>
+                      <p className="small" style={{ color: '#666' }}>{item.desc}</p>
+                    </div>
+                  </div>
                 </div>
               ))}
             </div>
@@ -143,40 +152,45 @@ export default function About() {
           </div>
 
           <div
-            style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(190px, 1fr))', gap: 24 }}
+            style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'center', gap: 24 }}
             className="stagger-children"
           >
             {team.map((member, i) => (
               <div
                 key={member.name}
-                className="glass-card fade-in-section"
+                className="card fade-in-section"
                 ref={addRef}
                 data-delay={`${i * 70}`}
-                style={{ padding: 32, textAlign: 'center' }}
               >
-                <div
-                  style={{
-                    width: 72,
-                    height: 72,
-                    borderRadius: '50%',
-                    background: 'rgba(71,176,199,0.10)',
-                    border: '2px solid rgba(71,176,199,0.25)',
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                    fontSize: '2.2rem',
-                    margin: '0 auto 16px',
-                  }}
-                  aria-hidden="true"
-                >
-                  {member.emoji}
+                <div className="sazzad-card" style={{ textAlign: 'center' }}>
+                  <div className="sazzad-bg"></div>
+                  <div className="sazzad-aurora"></div>
+                  <div style={{ position: 'relative', zIndex: 3, padding: '24px', width: '100%' }}>
+                    <div
+                      style={{
+                        width: 72,
+                        height: 72,
+                        borderRadius: '50%',
+                        background: 'rgba(71,176,199,0.10)',
+                        border: '2px solid rgba(71,176,199,0.25)',
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                        fontSize: '2.2rem',
+                        margin: '0 auto 16px',
+                      }}
+                      aria-hidden="true"
+                    >
+                      {member.emoji}
+                    </div>
+                    <h3 style={{ fontSize: '1.1rem', fontWeight: 700, marginBottom: 6, color: '#333' }}>
+                      {member.name}
+                    </h3>
+                    <p className="small" style={{ fontWeight: 600, color: '#666' }}>
+                      {member.role}
+                    </p>
+                  </div>
                 </div>
-                <h4 style={{ fontFamily: 'var(--font-heading)', fontSize: '1rem', fontWeight: 700, marginBottom: 6, color: 'var(--primary)' }}>
-                  {member.name}
-                </h4>
-                <p style={{ color: 'var(--secondary-dark)', fontSize: '0.8rem', fontWeight: 600 }}>
-                  {member.role}
-                </p>
               </div>
             ))}
           </div>
@@ -196,25 +210,36 @@ export default function About() {
             </p>
           </div>
 
-          <div className="socials-grid stagger-children" style={{ marginTop: 48 }}>
+          <div className="socials-grid stagger-children" style={{ marginTop: 48, display: 'flex', flexWrap: 'wrap', justifyContent: 'center', gap: '24px' }}>
             {socials.map((s, i) => (
-              <a
+              <div
                 key={s.name}
-                href={s.href}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="glass-card social-card fade-in-section"
+                className="card fade-in-section"
                 ref={addRef}
                 data-delay={`${i * 80}`}
-                aria-label={`Visit AspireCode on ${s.name}`}
               >
-                <span className="social-icon" aria-hidden="true">{s.icon}</span>
-                <h4>{s.name}</h4>
-                <p style={{ color: 'var(--secondary-dark)', fontWeight: 700, fontSize: '0.82rem', marginBottom: 4 }}>
-                  {s.handle}
-                </p>
-                <p>{s.desc}</p>
-              </a>
+                <a
+                  href={s.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="sazzad-card"
+                  aria-label={`Visit AspireCode on ${s.name}`}
+                  style={{ textDecoration: 'none' }}
+                >
+                  <div className="sazzad-bg"></div>
+                  <div className="sazzad-aurora"></div>
+                  <div style={{ position: 'relative', zIndex: 3, padding: '24px', width: '100%' }}>
+                    <h3 style={{ fontSize: '1.2rem', marginBottom: '8px', color: '#333' }}>
+                      <span aria-hidden="true" style={{ marginRight: '8px' }}>{s.icon}</span>
+                      {s.name}
+                    </h3>
+                    <p style={{ fontWeight: 700, fontSize: '0.9rem', marginBottom: 4, color: '#444' }}>
+                      {s.handle}
+                    </p>
+                    <p className="small" style={{ color: '#666' }}>{s.desc}</p>
+                  </div>
+                </a>
+              </div>
             ))}
           </div>
         </div>
